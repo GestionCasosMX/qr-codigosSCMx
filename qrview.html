@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Código asignado</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background-color: #f4f4f4;
+    }
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      display: inline-block;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #0078D4;
+    }
+    .codigo {
+      font-size: 32px;
+      font-weight: bold;
+      color: #333;
+      margin-top: 20px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Gracias por tu consulta</h1>
+    <p>Este es el código asignado:</p>
+    <div class="codigo" id="codigoMostrado">Cargando...</div>
+    <button onclick="copiarCodigo()">Copiar código</button>
+  </div>
+
+  <script>
+    function obtenerParametro(nombre) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(nombre);
+    }
+
+    function copiarCodigo() {
+      const codigo = document.getElementById('codigoMostrado').textContent;
+      navigator.clipboard.writeText(codigo)
+        .then(() => alert('Código copiado al portapapeles'))
+        .catch(err => alert('Error al copiar: ' + err));
+    }
+
+    const codigo = obtenerParametro('codigo');
+    const contenedor = document.getElementById('codigoMostrado');
+    contenedor.textContent = codigo ? codigo : 'Código no disponible';
+  </script>
+</body>
+</html>
